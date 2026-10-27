@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Glowish - Home</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background-color: #fff5f8;
+        }
+        marquee {
+            background-color: #c94f72;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        h2 {
+            text-align: center;
+            color: #c94f72;
+            margin-top: 30px;
+        }
+        
+        .price {
+            color: #c94f72;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding: 30px;
+        }
+
+        .product {
+            width: 220px;
+            background: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ccc;
+        }
+
+        .product img {
+            width: 170px;
+            height: 170px;
+            object-fit: contain;
+        }
+        
+        button {
+            border: none;
+            padding: 11px 18px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .buy {
+            background-color:palevioletred;
+            color: white;
+        }
+
+        .cart {
+            background-color: #f2b900;
+            color: black;
+        }
+    </style>
+<script>
+    function getProduct(button) {
+        var card = button.parentElement;
+
+        return {
+            name: card.querySelector("h3").innerText.trim(),
+            price: card.querySelector(".price").innerText.trim(),
+            image: card.querySelector("img").getAttribute("src")
+        };
+    }
+
+    function buyNow(button) {
+        var product = getProduct(button);
+
+        product.quantity = 1;
+
+        localStorage.setItem(
+            "buyProduct",
+            JSON.stringify(product)
+        );
+
+        window.location.href = "buy.html";
+    }
+        function addToCart(button) {
+
+            var product = getProduct(button);
+
+            var cart =
+                JSON.parse(localStorage.getItem("cart")) || [];
+
+            var found = false;
+
+            for (var i = 0; i < cart.length; i++) {
+
+                if (cart[i].name == product.name) {
+                    cart[i].quantity++;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found == false) {
+                product.quantity = 1;
+                cart.push(product);
+            }
+
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(cart)
+            );
+
+            window.location.href = "cart.html";
+        }
+
+        function buyNow(button) {
+
+            var product = getProduct(button);
+
+            localStorage.setItem(
+                "buyProduct",
+                JSON.stringify(product)
+            );
+
+            window.location.href = "buy.html";
+        }
+
+    </script>
+  </head>
+  <body>
+    <marquee>
+      🎉 MEGA BEAUTY SALE! | 💄 Amazing Makeup Offers |
+      🧴 Special Skincare Deals | 🌸 Shop Now at GLOWISH!
+    </marquee>
+    <h2>🔥 Trending Products</h2>
+    <div class="products">
+      <div class="product">
+        <img src="p1.jpg">
+          <h3>Face Moisturiser</h3>
+          <p class="price">₹399</p>
+          <button class="buy" onclick="buyNow(this)">Buy Now</button>
+          <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+        </div>
+
+        <div class="product">
+          <img src="p15.jpg">
+            <h3>Matte Lipstick</h3>
+            <p class="price">₹299</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart"
+            onclick="addToCart(this)">
+            Add to Cart
+          </button>
+          </div>
+
+          <div class="product">
+            <img src="p3.jpg">
+              <h3>LAKME Sunscreen</h3>
+              <p class="price">₹249</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+              <img src="p4.jpg">
+                <h3>Simple Cleanser</h3>
+                <p class="price">₹349</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+              </div>
+
+              <div class="product">
+                <img src="p5.jpg">
+                  <h3> Moisturiser</h3>
+                  <p class="price">₹449</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                </div>
+
+                <div class="product">
+                  <img src="p6.jpg">
+                    <h3>Tinted Sunscreen</h3>
+                    <p class="price">₹499</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                  </div>
+
+                  <div class="product">
+                    <img src="p7.jpg">
+                      <h3>Plam night serum</h3>
+                      <p class="price">₹279</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                    </div>
+
+                    <div class="product">
+                      <img src="p8.jpg">
+                        <h3>Vitamin C serum</h3>
+                        <p class="price">₹399</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                      </div>
+
+                      <div class="product">
+                        <img src="p9.jpg">
+                          <h3>Plam facewash</h3>
+                          <p class="price">₹329</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                        </div>
+                          
+                        <div class="product">
+                          <img src="p10.png">
+                            <h3>Simple gellwash</h3>
+                            <p class="price">₹299</p>
+                            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+                            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                          </div>
+
+                          <div class="product">
+                            <img src="p12.jpg">
+                              <h3>BB Cream</h3>
+                              <p class="price">₹350</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                            </div>
+
+                            <div class="product">
+                              <img src="p11.jpg">
+                                <h3>Sunscreen 50++</h3>
+                                <p class="price">₹299</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                              </div>
+
+                              <div class="product">
+                                <img src="p13.jpg">
+                                  <h3>Night Cream</h3>
+                                  <p class="price">₹199</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                                </div>
+
+                                <div class="product">
+                                  <img src="p14.jpg">
+                                    <h3>LAKME Cream</h3>
+                                    <p class="price">₹249</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                                  </div>
+
+                                  <div class="product">
+                                    <img src="p15.jpg">
+                                      <h3>Matte Lipstick</h3>
+                                      <p class="price">₹349</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                                    </div>
+
+                                    <div class="product">
+                                      <img src="p16.jpg">
+                                        <h3>Rose water</h3>
+                                        <p class="price">₹499</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                                      </div>
+
+                                      <div class="product">
+                                        <img src="p17.jpg">
+                                          <h3>Compact Powder</h3>
+                                          <p class="price">₹299</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                                        </div>
+
+                                        <div class="product">
+                                          <img src="p18.jpg">
+                                            <h3>Hair Mask</h3>
+                                            <p class="price">₹249</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                                          </div>
+
+                                          <div class="product">
+                                            <img src="p19.png">
+                                              <h3>Lip Gloss</h3>
+                                              <p class="price">₹199</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                                            </div>
+
+                                            <div class="product">
+                                              <img src="p20.png">
+                                                <h3>Makeup Remover</h3>
+                                                <p class="price">₹399</p>
+            <button class="buy" onclick="buyNow(this)">Buy Now</button>
+            <button class="cart" onclick="addToCart(this)">Add to Cart</button>
+                                              </div>
+                                              
+                                            </div>
+                                          </body>
+                                        </html>

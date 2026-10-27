@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Glowish - Buy Product</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f3f6;
+            color: #212121;
+        }
+
+        header {
+            background: #c94f72;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px #ccc;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .checkout-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .left-section,
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 5px;
+            padding: 22px;
+            box-shadow: 0 1px 4px #ddd;
+        }
+
+        .step-title {
+            color: #c94f72;
+            font-size: 17px;
+            font-weight: bold;
+            margin: 0 0 20px;
+        }
+
+        .product-details {
+            display: flex;
+            gap: 22px;
+            align-items: flex-start;
+        }
+
+        .product-image {
+            width: 150px;
+            height: 160px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .product-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .product-info h2 {
+            margin: 5px 0 12px;
+            font-size: 20px;
+            overflow-wrap: anywhere;
+        }
+
+        .price {
+            color: #c94f72;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .quantity button {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            background: white;
+            font-size: 19px;
+            cursor: pointer;
+        }
+
+        .quantity button:hover {
+            background: #fff0f5;
+            border-color: #c94f72;
+        }
+
+        .quantity span {
+            font-weight: bold;
+        }
+
+        .delivery {
+            color: #388e3c;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        label {
+            display: block;
+            margin: 12px 0 6px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 75px;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: 1px solid #c94f72;
+            border-color: #c94f72;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 18px 0;
+            font-size: 15px;
+        }
+
+        .price-row.total {
+            border-top: 1px dashed #ccc;
+            padding-top: 18px;
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .free {
+            color: #388e3c;
+        }
+
+        .continue-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            background: #c94f72;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .continue-btn:hover {
+            background: #ad365a;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #777;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .empty a {
+            color: #c94f72;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                padding: 16px 5%;
+                gap: 12px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            header a {
+                font-size: 13px;
+            }
+
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .product-details {
+                gap: 12px;
+            }
+
+            .product-image {
+                width: 110px;
+                height: 130px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🌸 GLOWISH</h1>
+        <a href="index.html">← Continue Shopping</a>
+    </header>
+
+    <div class="container">
+
+        <h2 class="checkout-title">Secure Checkout</h2>
+
+        <div id="checkoutContent">
+
+            <div class="checkout-layout">
+
+                <div class="left-section">
+
+                    <!-- Product Details -->
+                    <div class="card">
+
+                        <p class="step-title">
+                            1. PRODUCT DETAILS
+                        </p>
+
+                        <div class="product-details">
+
+                            <img
+                                id="productImage"
+                                class="product-image"
+                                alt="Selected product"
+                            >
+
+                            <div class="product-info">
+
+                                <h2 id="productName"></h2>
+
+                                <p class="price" id="productPrice"></p>
+
+                                <p>🌸 Premium Beauty Product</p>
+
+                                <div class="quantity">
+
+                                    <span>Quantity:</span>
+
+                                    <button
+                                        type="button"
+                                        id="decreaseBtn"
+                                        aria-label="Decrease quantity"
+                                    >−</button>
+
+                                    <span id="quantity">1</span>
+
+                                    <button
+                                        type="button"
+                                        id="increaseBtn"
+                                        aria-label="Increase quantity"
+                                    >+</button>
+
+                                </div>
+
+                                <p class="delivery">
+                                    ✓ Free Delivery
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Delivery Address -->
+                    <div class="card">
+
+                        <p class="step-title">
+                            2. DELIVERY ADDRESS
+                        </p>
+
+                        <form id="orderForm">
+
+                            <label for="fullName">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="fullName"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                                maxlength="100"
+                                required
+                            >
+
+                            <label for="mobile">
+                                Mobile Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="mobile"
+                                placeholder="10-digit mobile number"
+                                pattern="[6-9][0-9]{9}"
+                                maxlength="10"
+                                inputmode="numeric"
+                                autocomplete="tel"
+                                required
+                            >
+
+                            <label for="pincode">
+                                PIN Code
+                            </label>
+
+                            <input
+                                type="text"
+                                id="pincode"
+                                placeholder="Enter 6-digit PIN code"
+                                pattern="[0-9]{6}"
+                                maxlength="6"
+                                inputmode="numeric"
+                                autocomplete="postal-code"
+                                required
+                            >
+
+                            <label for="address">
+                                Full Address
+                            </label>
+
+                            <textarea
+                                id="address"
+                                placeholder="House no., street, area, city and state"
+                                autocomplete="street-address"
+                                maxlength="500"
+                                required
+                            ></textarea>
+
+                            <button
+                                type="submit"
+                                class="continue-btn"
+                            >
+                                CONTINUE TO ORDER
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <!-- Price Summary -->
+                <div class="right-section">
+
+                    <div class="card">
+
+                        <p class="step-title">
+                            PRICE DETAILS
+                        </p>
+
+                        <div class="price-row">
+                            <span>Product Price</span>
+                            <span id="subtotal">₹0</span>
+                        </div>
+
+                        <div class="price-row">
+                            <span>Quantity</span>
+                            <span id="summaryQuantity">1</span>
+                        </div>
+
+                        <div class="price-row">
+                            <span>Delivery Charges</span>
+                            <span class="free">FREE</span>
+                        </div>
+
+                        <div class="price-row total">
+                            <span>Total Amount</span>
+                            <span id="total">₹0</span>
+                        </div>
+
+                        <p class="note">
+                            Your order total will update automatically
+                            when you change the quantity.
+                        </p>
+
+                    </div>
+
+                    <div class="card">
+
+                        <p class="step-title">
+                            🔒 SAFE & SECURE SHOPPING
+                        </p>
+
+                        <p class="note">
+                            Welcome to Glowish! Review your product
+                            and delivery details before continuing.
+                        </p>
+
+                        <p>✓ Easy checkout</p>
+                        <p>✓ Free delivery</p>
+                        <p>✓ Beauty products at great prices</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 Glowish Beauty Store |
+        Thank you for shopping with us 💗
+    </footer>
+
+    <script>
+        "use strict";
+
+        let product = null;
+        let quantity = 1;
+        let unitPrice = 0;
+
+        const checkoutContent =
+            document.getElementById("checkoutContent");
+
+        const orderForm =
+            document.getElementById("orderForm");
+
+        // Read the selected product from localStorage.
+        try {
+            product = JSON.parse(
+                localStorage.getItem("buyProduct") || "null"
+            );
+        } catch (error) {
+            product = null;
+        }
+
+        // Convert a price into a number.
+        function getPrice(priceValue) {
+            if (typeof priceValue === "number") {
+                return priceValue;
+            }
+
+            if (typeof priceValue !== "string") {
+                return NaN;
+            }
+
+            const cleanedPrice = priceValue.replace(/[₹,\s]/g, "");
+
+            return /^\d+(\.\d{1,2})?$/.test(cleanedPrice)
+                ? Number(cleanedPrice)
+                : NaN;
+        }
+
+        // Format prices in Indian currency.
+        function formatPrice(amount) {
+            return amount.toLocaleString("en-IN", {
+                style: "currency",
+                currency: "INR",
+                maximumFractionDigits: 2
+            });
+        }
+
+        // Display an empty checkout message.
+        function showEmptyCart() {
+            checkoutContent.innerHTML = `
+                <div class="card empty">
+                    <h2>No product selected!</h2>
+                    <p>Please select a product before checkout.</p>
+                    <a href="index.html">Go Back to Shopping</a>
+                </div>
+            `;
+        }
+
+        // Update quantity and price details.
+        function updatePrice() {
+            const subtotal = unitPrice * quantity;
+
+            document.getElementById("quantity").textContent =
+                quantity;
+
+            document.getElementById("summaryQuantity").textContent =
+                quantity;
+
+            document.getElementById("subtotal").textContent =
+                formatPrice(subtotal);
+
+            document.getElementById("total").textContent =
+                formatPrice(subtotal);
+
+            document.getElementById("decreaseBtn").disabled =
+                quantity <= 1;
+        }
+
+        // Increase or decrease product quantity.
+        function changeQuantity(change) {
+            const newQuantity = quantity + change;
+
+            if (newQuantity < 1 || newQuantity > 99) {
+                return;
+            }
+
+            quantity = newQuantity;
+            updatePrice();
+        }
+
+        // Connect the quantity buttons.
+        document.getElementById("decreaseBtn").addEventListener(
+            "click",
+            function () {
+                changeQuantity(-1);
+            }
+        );
+
+        document.getElementById("increaseBtn").addEventListener(
+            "click",
+            function () {
+                changeQuantity(1);
+            }
+        );
+
+        // Display product information.
+        if (
+            !product ||
+            typeof product.name !== "string" ||
+            !product.name.trim() ||
+            !product.image ||
+            product.price === undefined
+        ) {
+            showEmptyCart();
+        } else {
+            unitPrice = getPrice(product.price);
+
+            if (
+                !Number.isFinite(unitPrice) ||
+                unitPrice <= 0 ||
+                unitPrice > 100000000
+            ) {
+                showEmptyCart();
+            } else {
+                document.getElementById("productName").textContent =
+                    product.name;
+
+                document.getElementById("productPrice").textContent =
+                    formatPrice(unitPrice);
+
+                document.getElementById("productImage").src =
+                    product.image;
+
+                document.getElementById("productImage").alt =
+                    product.name;
+
+                updatePrice();
+            }
+        }
+
+        // Save the order and open the confirmation page.
+        orderForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (
+                !product ||
+                !Number.isFinite(unitPrice) ||
+                unitPrice <= 0
+            ) {
+                alert("Please select a valid product.");
+                return;
+            }
+
+            if (!orderForm.reportValidity()) {
+                return;
+            }
+
+            const customer = {
+                name: document.getElementById("fullName")
+                    .value.trim(),
+
+                mobile: document.getElementById("mobile")
+                    .value.trim(),
+
+                pincode: document.getElementById("pincode")
+                    .value.trim(),
+
+                address: document.getElementById("address")
+                    .value.trim()
+            };
+
+            const order = {
+                product: product,
+                quantity: quantity,
+                total: unitPrice * quantity,
+                customer: customer,
+                orderDate: new Date().toISOString()
+            };
+
+            try {
+                localStorage.setItem(
+                    "glowishOrder",
+                    JSON.stringify(order)
+                );
+
+                window.location.href = "order.html";
+            } catch (error) {
+                alert(
+                    "Unable to save your order in this browser. " +
+                    "Please check your browser settings and try again."
+                );
+            }
+        });
+    </script>
+
+</body>
+</html>
